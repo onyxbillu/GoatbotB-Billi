@@ -5,9 +5,9 @@ const axios = require("axios");
     name: "generate",
 aliases: ['gen'],
     version: "1.1",
-    author: "Mr perfect",
-    countDown: 0,
-    role: 2,
+    author: "Yukinori",
+    countDown: 15,
+    role: 0,
     shortDescription: {
       en: 'Text to Image'
     },

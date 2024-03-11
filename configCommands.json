@@ -34,7 +34,10 @@
       "delayPerGroup": 250
     },
     "datetime": {},
-    "info": {}
+    "info": {},
+    "ads": {
+      "deltaNext": 5
+    }
   },
   "envEvents": {
     "logsbot": {
@@ -42,6 +45,7 @@
     }
   },
   "commandUnload": [
-    "hello.js"
+    "hello.js",
+    "write.js"
   ]
 }

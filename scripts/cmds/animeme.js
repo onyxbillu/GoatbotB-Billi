@@ -1,6 +1,6 @@
 module.exports = {
   config: {
-    name: "animememe",
+    name: "animeme",
     aliases: ["animeme"],
     version: "1.0",
     author: "kshitiz",
