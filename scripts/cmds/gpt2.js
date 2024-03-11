@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const path = require('path');
 
 const a = {
-  name: "gpt",
+  name: "ai",
   version: "2.0",
   author: "kshitiz",
   longDescription: "Chat with GPT-4",

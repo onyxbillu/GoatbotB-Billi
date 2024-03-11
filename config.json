@@ -1,7 +1,7 @@
 {
   "facebookAccount": {
-    "email": "botgoat8@gmail.com",
-    "password": "",
+    "email": "ybotme12@gmail.com",
+    "password": "bishwo13579",
     "2FASecret": "",
     "i_user": "",
     "proxy": null,
@@ -19,9 +19,10 @@
     ]
   },
   "adminBot": [
-    "100042711173378",
-    "100042408666316",
-    "100053257441926"
+    "100087591006635",
+    "100087591006635",
+    "100087591006635",
+    "100083234618117"
   ],
   "whiteListMode": {
     "enable": false,
@@ -128,7 +129,7 @@
     "event": true,
     "read_receipt": false,
     "typ": false,
-    "presence": false
+    "presence": true
   },
   "optionsFca": {
     "forceLogin": true,
@@ -136,10 +137,16 @@
     "updatePresence": true,
     "listenTyping": true,
     "logLevel": "error",
-    "selfListen": true,
+    "selfListen": false,
     "selfListenEvent": true,
     "autoMarkDelivery": false,
     "autoReconnect": false,
     "notes": "Document here: https://github.com/ntkhang03/fb-chat-api/blob/master/DOCS.md#apisetoptionsoptions "
+  },
+  "whiteListModeThread": {
+    "enable": false,
+    "whiteListThreadIds": [],
+    "notes": "if you enable this feature, only the thread in the whiteListThreadIds list can use the bot",
+    "how_it_work": "if you enable both whiteListMode and whiteListModeThread, the system will check if the user is in whiteListIds, then check if the thread is in whiteListThreadIds, if one of the conditions is true, the user can use the bot"
   }
 }
