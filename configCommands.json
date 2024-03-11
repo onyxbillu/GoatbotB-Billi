@@ -33,7 +33,8 @@
     "note": {
       "delayPerGroup": 250
     },
-    "datetime": {}
+    "datetime": {},
+    "info": {}
   },
   "envEvents": {
     "logsbot": {

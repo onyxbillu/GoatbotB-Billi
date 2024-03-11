@@ -1,55 +1,61 @@
+const axios = require('axios');
+
+const GPT_API_URL = 'https://sandipapi.onrender.com/gpt';
+const PREFIXES = ['ai'];
+const horizontalLine = "━━━━━━━━━━━━━━━";
+
 module.exports = {
   config: {
-    name: "ai",
-    aliases: [],
-    version: 1.6,
-    author: "modified by (anonymous)",
-    role: 0,
-    shortDescription: "AI that can speak every language on Earth fluently",
-    guide: "{pn} <query>",
-    category: "AI"
+    name: "ai0",
+    version: 1.0,
+    author: "OtinXSandip",
+    longDescription: "AI",
+    category: "ai",
+    guide: {
+      en: "{p} questions",
+    },
   },
-  onStart: function() {},
-  onChat: async function({ message: m, event: e, args: a, usersData: u }) {
-    var p = [`${await global.utils.getPrefix(e.threadID)}${this.config.name}`, "ai"]; 
+  onStart: async function () {
+    // Initialization logic if needed
+  },
+  onChat: async function ({ api, event, args, message }) {
+    try {
+      const prefix = PREFIXES.find((p) => event.body && event.body.toLowerCase().startsWith(p));
 
-if (p.some(b => a[0].toLowerCase().startsWith(b))) {
-     try {
-          var __ = [{ id: e.senderID, tag: await u.getName(e.senderID) }];
-          const r = await require("axios").post(`https://test-ai-ihc6.onrender.com/api`, {
-      prompt: a.slice(1).join(" "),
-    apikey: "GayKey-YMBsPUY0xUSNjHvycOx9",
-       name: __[0]['tag'],
-       id: __[0]['id'],
-          });
-          var _ = r.data.result.replace(/{name}/g, __[0]['tag']).replace(/{pn}/g, p[0]);
-          if (r.data.av) {
-            if (Array.isArray(r.data.av)) {
-              const avs = r.data.av.map(url => global.utils.getStreamFromURL(url));
-              const avss = await Promise.all(avs);
-  m.reply({
-  body: _,
- mentions: __,
- attachment: avss
-  });
-   } else {
-   m.reply({
-     body: _,
-     mentions: __,
-                attachment: await global.utils.getStreamFromURL(r.data.av)
-             });
-      }
-          } else {
-          m.reply({
-     body: _,
-      mentions: __
-     });
-        }
-        } catch (error) {
-          console.error(error);
-          m.reply("Error " + error);
-        }
+      if (!prefix) {
+        return; // Invalid prefix, ignore the command
       }
 
+      const prompt = event.body.substring(prefix.length).trim();
+
+      if (!prompt) {
+        const defaultMessage = getCenteredHeader("MR PERFECT | 🧋✨") + "\n" + horizontalLine + "\nHello! Ask me anything!\n" + horizontalLine;
+        await message.reply(defaultMessage);
+        return;
+      }
+
+      const answer = await getGPTResponse(prompt);
+
+      // Adding header and horizontal lines to the answer
+      const answerWithHeader = getCenteredHeader("MR PERFECT | 🧋✨") + "\n" + horizontalLine + "\n" + answer + "\n" + horizontalLine;
+
+      await message.reply(answerWithHeader);
+    } catch (error) {
+      console.error("Error:", error.message);
+      // Additional error handling if needed
+    }
   }
 };
+
+function getCenteredHeader(header) {
+  const totalWidth = 32; // Adjust the total width as needed
+  const padding = Math.max(0, Math.floor((totalWidth - header.length) / 2));
+  return " ".repeat(padding) + header;
+}
+
+async function getGPTResponse(prompt) {
+  // Implement caching logic here
+
+  const response = await axios.get(`${GPT_API_URL}?prompt=${encodeURIComponent(prompt)}`);
+  return response.data.answer;
+}
