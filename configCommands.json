@@ -37,6 +37,9 @@
     "info": {},
     "ads": {
       "deltaNext": 5
+    },
+    "antiout": {
+      "deltaNext": 5
     }
   },
   "envEvents": {
@@ -46,6 +49,7 @@
   },
   "commandUnload": [
     "hello.js",
-    "write.js"
+    "write.js",
+    "war.js"
   ]
 }
