@@ -40,6 +40,9 @@
     },
     "antiout": {
       "deltaNext": 5
+    },
+    "botnick": {
+      "delayPerGroup": 250
     }
   },
   "envEvents": {
@@ -50,6 +53,7 @@
   "commandUnload": [
     "hello.js",
     "write.js",
-    "war.js"
+    "war.js",
+    "ai.js"
   ]
 }

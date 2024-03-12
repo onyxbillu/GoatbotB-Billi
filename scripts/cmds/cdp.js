@@ -4,9 +4,9 @@ const fs = require("fs-extra");
 module.exports = {
  config: {
  name: "cdp",
- aliases: ['cp'],
+ aliases: ["coupledp"],
  version: "1.0",
- author: "XyryllPanget",
+ author: "Loid Butter",
  countDown: 5,
  role: 0,
  shortDescription: {
@@ -15,7 +15,7 @@ module.exports = {
  longDescription: {
  en: "couple dp"
  },
- category: "love",
+ category: "image",
  guide: {
  en: "{pn}"
  }
@@ -31,12 +31,12 @@ module.exports = {
  const femaleImg = await axios.get(data.female, { responseType: "arraybuffer" });
  fs.writeFileSync(__dirname + "/tmp/img2.png", Buffer.from(femaleImg.data, "utf-8"));
 
- const msg = "「 Here's your pair Dp✨ 」";
+ const msg = "Here is your couple dp";
  const allImages = [
  fs.createReadStream(__dirname + "/tmp/img1.png"),
  fs.createReadStream(__dirname + "/tmp/img2.png")
  ];
-
+ 
  return api.sendMessage({
  body: msg,
  attachment: allImages

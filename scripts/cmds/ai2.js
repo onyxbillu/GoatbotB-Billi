@@ -6,7 +6,7 @@ const horizontalLine = "━━━━━━━━━━━━━━━";
 
 module.exports = {
   config: {
-    name: "ai0",
+    name: "ai",
     version: 1.0,
     author: "OtinXSandip",
     longDescription: "AI",
@@ -29,7 +29,7 @@ module.exports = {
       const prompt = event.body.substring(prefix.length).trim();
 
       if (!prompt) {
-        const defaultMessage = getCenteredHeader("MR PERFECT | 🧋✨") + "\n" + horizontalLine + "\nHello! Ask me anything!\n" + horizontalLine;
+        const defaultMessage = getCenteredHeader("MR PERFECT | 🧋✨") + "\n" + horizontalLine + "\nHello there! How can I help you with AI-related queries!\n" + horizontalLine;
         await message.reply(defaultMessage);
         return;
       }
