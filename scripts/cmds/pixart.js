@@ -9,7 +9,7 @@ module.exports = {
     aliases: [],
     version: "1.0",
     author: "Kshitiz",
-    countDown: 20,
+    countDown: 0,
     role: 0,
     shortDescription: "lado puti",
     longDescription: "image to image",

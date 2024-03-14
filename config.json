@@ -1,6 +1,6 @@
 {
   "facebookAccount": {
-    "email": "ybotme12@gmail.com",
+    "email": "bishwobastola258@gmail.com",
     "password": "bishwo13579",
     "2FASecret": "",
     "i_user": "",
@@ -19,12 +19,7 @@
     ]
   },
   "adminBot": [
-    "100087591006635",
-    "100087591006635",
-    "100087591006635",
-    "",
-    "",
-    ""
+    "100087591006635"
   ],
   "whiteListMode": {
     "enable": false,
@@ -131,7 +126,7 @@
     "event": true,
     "read_receipt": false,
     "typ": false,
-    "presence": true
+    "presence": false
   },
   "optionsFca": {
     "forceLogin": true,
@@ -139,7 +134,7 @@
     "updatePresence": true,
     "listenTyping": true,
     "logLevel": "error",
-    "selfListen": false,
+    "selfListen": true,
     "selfListenEvent": true,
     "autoMarkDelivery": false,
     "autoReconnect": false,

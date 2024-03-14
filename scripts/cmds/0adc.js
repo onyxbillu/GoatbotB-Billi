@@ -3,7 +3,7 @@ module.exports = {
 		name: "adc",
 		aliases: ["ad"],
 		version: "1.2",
-		author: "Loid Butter",
+		author: "Loid butter",
 		countDown: 5,
 		role: 2,
 		shortDescription: {

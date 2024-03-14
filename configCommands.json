@@ -43,6 +43,9 @@
     },
     "botnick": {
       "delayPerGroup": 250
+    },
+    "cry": {
+      "deltaNext": 5
     }
   },
   "envEvents": {
@@ -53,7 +56,6 @@
   "commandUnload": [
     "hello.js",
     "write.js",
-    "war.js",
-    "ai.js"
+    "war.js"
   ]
 }
