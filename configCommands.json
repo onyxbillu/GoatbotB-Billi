@@ -46,6 +46,9 @@
     },
     "cry": {
       "deltaNext": 5
+    },
+    "tell": {
+      "delayPerGroup": 250
     }
   },
   "envEvents": {
@@ -56,6 +59,7 @@
   "commandUnload": [
     "hello.js",
     "write.js",
-    "war.js"
+    "war.js",
+    "tell.js"
   ]
 }
