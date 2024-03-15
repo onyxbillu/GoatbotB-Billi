@@ -34,7 +34,7 @@ module.exports = {
         return message.reply("Failed to fetch music data. Please try again later.");
       }
 
-      const { music_name, options } = musicData;
+      const { music_name, options, correct_answer } = musicData;
       const query = music_name;
       const searchResults = await yts(query);
 
@@ -64,8 +64,7 @@ module.exports = {
         const audiobody = `
 Guess the music Name
 Options:
-A. ${options.A}
-B. ${options.B}
+${optionsString}
 `;
         const replyMessage = { body: audiobody, attachment: fs.createReadStream(filePath) };
 
@@ -73,7 +72,7 @@ B. ${options.B}
         global.GoatBot.onReply.set(sentMessage.messageID, {
           commandName: this.config.name,
           messageID: sentMessage.messageID,
-          correctAnswer: musicData.correct_answer
+          correctAnswer: correct_answer
         });
 
 
@@ -141,7 +140,7 @@ B. ${options.B}
 
 async function fetchMusic() {
   try {
-    const response = await axios.get('https://gm-fcjt.onrender.com/kshitiz');
+    const response = await axios.get('https://guess-music.vercel.app/kshitiz');
     return response.data;
   } catch (error) {
     console.error("Error fetching music data:", error);
