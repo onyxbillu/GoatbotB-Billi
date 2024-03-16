@@ -59,7 +59,6 @@
   "commandUnload": [
     "hello.js",
     "write.js",
-    "war.js",
-    "tell.js"
+    "war.js"
   ]
 }
