@@ -1,138 +1,64 @@
-const fs = require('fs');
-const axios = require('axios');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
+const axios = require("axios");
+const tinyurl = require('tinyurl');
 
 module.exports = {
   config: {
-    name: 'art2',
-    version: '1.5',
-    author: 'Mr Stoic',
-    countDown: 10,
+    name: "render",
+    aliases: [],
+    version: "1.0",
+    author: "Kshitiz",
+    countDown: 20,
     role: 0,
-  shortDescription: {
-      vi: "",
-      en: "Transform Image To Ai Image"
-    },
-    category: "Ai Generations",
+    shortDescription: "lado puti",
+    longDescription: " generate 3d type image & support image to image",
+    category: "fun",
     guide: {
-      vi: "",
-      en: "Reply to an image and type -art"
-    },
-  },
-
-  onStart: async function ({ event, api, args, message }) {
-    let imageUrl;
-
-    if (event.type === "message_reply") {
-      if (["photo", "sticker"].includes(event.messageReply.attachments[0]?.type)) {
-        imageUrl = event.messageReply.attachments[0].url;
-      } else {
-        return api.sendMessage({ body: "❌ | Reply must be an image." }, event.threadID);
-      }
-    } else if (args[0]?.match(/(https?:\/\/.*\.(?:png|jpg|jpeg))/g)) {
-      imageUrl = args[0];
-    } else {
-      return api.sendMessage({ body: "❌ | Reply to an image." }, event.threadID);
+      en: "{p}render reply to image or {p}render [prompt]"
     }
+  },
+  onStart: async function ({ message, event, args, api }) {
+    api.setMessageReaction("🕐", event.messageID, (err) => {}, true);
 
-    message.reply("✅ | Transforming your image...", async (err, info) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
+    try {
+      const promptApiUrl = "https://www.api.vyturex.com/describe?url=";
+      const renderApiUrl = "https://ai-tools.replit.app/render?prompt=";
 
-      const api_key = '3d0a1d4c-5251-4643-b094-6c1220745968';
-      const prompt = args.slice(1).join(' ');
-      let aspect_ratio = "square";
+      let prompt = '';
 
-      try {
-        const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-        const imageBuffer = Buffer.from(response.data);
-        const dimensions = await getImageDimensions(imageBuffer);
-        const ratio = dimensions.width / dimensions.height;
-
-        if (ratio > 1.4) {
-          aspect_ratio = "landscape";
-        } else if (ratio < 0.8) {
-          aspect_ratio = "portrait";
+      if (event.type === "message_reply") {
+        const attachment = event.messageReply.attachments[0];
+        if (!attachment || !["photo", "sticker"].includes(attachment.type)) {
+          return message.reply("❌ | Reply must be an image.");
         }
-      } catch (error) {
-        console.error("Error getting image dimensions:", error);
+        const imageUrl = await tinyurl.shorten(attachment.url);
+        const promptResponse = await axios.get(promptApiUrl + encodeURIComponent(imageUrl));
+        prompt = encodeURIComponent(promptResponse.data);
+      } else {
+        prompt = encodeURIComponent(args.join(" "));
       }
 
-      async function generateImage(imageUrl, prompt) {
-        try {
-          const options = {
-            method: 'POST',
-            url: 'https://api.prodia.com/v1/sd/transform',
-            headers: {
-              accept: 'application/json',
-              'content-type': 'application/json',
-              'X-Prodia-Key': api_key,
-            },
-            data: {
-              imageUrl: imageUrl,
-              prompt: prompt,
-              model: 'meinamix_meinaV9.safetensors [2ec66ab0]',
-              denoising_strength: 0.40,
-              negative_prompt: 'worst quality, normal quality, low quality, low res, blurry, text, watermark, logo, banner, extra digits, cropped, jpeg artifacts, signature, username, error, sketch ,duplicate, ugly, monochrome, horror, geometry, mutation, disgusting, bad anatomy, bad hands, three hands, three legs, bad arms, missing legs, missing arms, poorly drawn face, bad face, fused face, cloned face, worst face, three crus, extra crus, fused crus, worst feet, three feet, fused feet, fused thigh, three thigh, fused thigh, extra thigh, worst thigh, missing fingers, extra fingers, ugly fingers, long fingers, horn, realistic photo, extra eyes, huge eyes, 2girl, amputation, disconnected limbs',
-style_preset: 'anime',
-              sampler: 'Euler a',
-              steps: 50,
-              cfg_scale: 8,
-              seed: -1,
-              upscale: true,
-              aspect_ratio: aspect_ratio,
-            },
-          };
+      const renderResponse = await axios.get(renderApiUrl + prompt, {
+        responseType: "arraybuffer"
+      });
 
-          const response = await axios(options);
-          const job = response.data.job;
-
-          while (true) {
-            const jobResponse = await axios.get(`https://api.prodia.com/v1/job/${job}`, {
-              headers: {
-                accept: 'application/json',
-                'X-Prodia-Key': api_key,
-              },
-            });
-
-            if (jobResponse.data.status === 'succeeded') {
-              return jobResponse.data.imageUrl;
-            }
-
-            await new Promise(resolve => setTimeout(resolve, 500));
-          }
-        } catch (err) {
-          console.error(err);
-          throw err;
-        }
+      const cacheFolderPath = path.join(__dirname, "/cache");
+      if (!fs.existsSync(cacheFolderPath)) {
+        fs.mkdirSync(cacheFolderPath);
       }
+      const imagePath = path.join(cacheFolderPath, `${Date.now()}_generated_image.png`);
+      fs.writeFileSync(imagePath, Buffer.from(renderResponse.data, "binary"));
 
-      try {
-        const imageLink = await generateImage(imageUrl, prompt);
-        console.log('Generated image URL:', imageLink);
+      const stream = fs.createReadStream(imagePath);
+      message.reply({
+        body: "",
+        attachment: stream
+      });
 
-        const response = await axios.get(imageLink, { responseType: 'arraybuffer' });
-        const imageBuffer = Buffer.from(response.data);
-
-        const imageFileName = 'generated_image.png';
-        const imagePath = path.join(__dirname, imageFileName);
-        fs.writeFileSync(imagePath, imageBuffer);
-
-        await api.sendMessage({
-          body: `✅ | Image Transformed\n\n`,
-          attachment: fs.createReadStream(imagePath),
-        }, event.threadID);
-      } catch (error) {
-        console.error(error);
-      }
-    });
+    } catch (error) {
+      console.error("Error:", error);
+      message.reply("❌ | An error occurred. Please try again later.");
+    }
   }
 };
-
-async function getImageDimensions(imageBuffer) {
-  const imageSize = require('image-size');
-  const dimensions = imageSize(imageBuffer);
-  return dimensions;
-        }
