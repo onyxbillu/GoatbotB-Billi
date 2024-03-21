@@ -1,30 +1,21 @@
 [
   {
     "key": "datr",
-    "value": "jmz0ZZC1KxuGutEYbbjtFS6M",
+    "value": "mPHZZTQDkempuYTPfZUZ-M73",
     "domain": "facebook.com",
     "path": "/",
     "hostOnly": false,
-    "creation": "2024-03-17T15:26:01.531Z",
-    "lastAccessed": "2024-03-17T15:26:05.700Z"
+    "creation": "2024-03-18T06:27:14.050Z",
+    "lastAccessed": "2024-03-18T06:27:19.567Z"
   },
   {
     "key": "sb",
-    "value": "jmz0ZfpDqr0HdFdAnxOSKwBs",
+    "value": "mPHZZRtSChQNRdtsjWHzXWcH",
     "domain": "facebook.com",
     "path": "/",
     "hostOnly": false,
-    "creation": "2024-03-17T15:26:01.617Z",
-    "lastAccessed": "2024-03-17T15:26:05.700Z"
-  },
-  {
-    "key": "fr",
-    "value": "0UhsfaBGX2OIr8SF5.AWXcqZkT8BncGBn4VA6hnBYxMC0.Bl9GyO..AAA.0.0.Bl9GyO.AWUz_ixyDNI",
-    "domain": "facebook.com",
-    "path": "/",
-    "hostOnly": false,
-    "creation": "2024-03-17T15:26:01.625Z",
-    "lastAccessed": "2024-03-17T15:26:05.700Z"
+    "creation": "2024-03-18T06:27:14.129Z",
+    "lastAccessed": "2024-03-18T06:27:19.567Z"
   },
   {
     "key": "c_user",
@@ -32,16 +23,25 @@
     "domain": "facebook.com",
     "path": "/",
     "hostOnly": false,
-    "creation": "2024-03-17T15:26:01.701Z",
-    "lastAccessed": "2024-03-17T15:26:05.700Z"
+    "creation": "2024-03-18T06:27:14.144Z",
+    "lastAccessed": "2024-03-18T06:27:19.567Z"
   },
   {
     "key": "xs",
-    "value": "42%3ATeP_puGAsbEfuQ%3A2%3A1710517391%3A-1%3A-1",
+    "value": "15%3AVjge2sqM-bb4cg%3A2%3A1710517353%3A-1%3A-1%3A%3AAcUTRTxOPRjD-YdzPdEy6Y5NfTcxbx-Q1j02LJEm-w",
     "domain": "facebook.com",
     "path": "/",
     "hostOnly": false,
-    "creation": "2024-03-17T15:26:01.706Z",
-    "lastAccessed": "2024-03-17T15:26:05.700Z"
+    "creation": "2024-03-18T06:27:14.152Z",
+    "lastAccessed": "2024-03-18T06:27:19.567Z"
+  },
+  {
+    "key": "fr",
+    "value": "1eVYPpRYTdEpKedjh.AWX9fh0slIEewWEQGRypBw4A5PY.Bl995p..AAA.0.0.Bl995p.AWVt7x61c8g",
+    "domain": "facebook.com",
+    "path": "/",
+    "hostOnly": false,
+    "creation": "2024-03-18T06:27:14.214Z",
+    "lastAccessed": "2024-03-18T06:27:19.567Z"
   }
 ]

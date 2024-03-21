@@ -1,7 +1,7 @@
 {
   "facebookAccount": {
-    "email": "bastolabishwo336@gmail.com",
-    "password": "bishwo13579",
+    "email": "enter your email of fake id ",
+    "password": "enter you fake id password",
     "2FASecret": "",
     "i_user": "",
     "proxy": null,
@@ -19,11 +19,10 @@
     ]
   },
   "adminBot": [
-    "100087591006635",
-    "100093016749575",
-    "61557049904510",
-    "61555677351030",
-    "100035872637519"
+    "",
+    "",
+    "",
+    ""
   ],
   "whiteListMode": {
     "enable": false,
